@@ -4,6 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welkom Video</title>
+  <style>
+    /* Zorg ervoor dat de knop altijd zichtbaar is */
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+      position: relative;
+    }
+
+    /* Voeg wat styling toe aan de knop */
+    #fullscreenButton {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      z-index: 10; /* Zorgt ervoor dat de knop boven de video wordt weergegeven */
+    }
+  </style>
   <script>
     // Functie om de video in volledig scherm te openen
     function toggleFullScreen() {
@@ -20,14 +47,14 @@
     }
   </script>
 </head>
-<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background-color:black;">
+<body>
   <!-- Video-element zonder controls -->
   <video id="videoElement" autoplay loop muted style="width:100%; height:auto;" oncontextmenu="return false;">
     <source src="assets/video/Welkomfilmpje.mp4" type="video/mp4">
     Je browser ondersteunt deze video niet.
   </video>
 
-  <!-- Knop voor Volledig Scherm -->
-  <button onclick="toggleFullScreen()" style="position:absolute; top:10px; left:10px; padding:10px; background-color:rgba(0,0,0,0.5); color:white; border:none; cursor:pointer;">Volledig Scherm</button>
+  <!-- Volledig Scherm knop -->
+  <button id="fullscreenButton" onclick="toggleFullScreen()">Volledig Scherm</button>
 </body>
 </html>
