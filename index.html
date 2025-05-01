@@ -42,17 +42,6 @@
       top: 70px;
       left: 20px;
     }
-    /* Hide buttons when container is in fullscreen */
-    #videoContainer:fullscreen #fullscreenButton,
-    #videoContainer:-webkit-full-screen #fullscreenButton,
-    #videoContainer:-moz-full-screen #fullscreenButton,
-    #videoContainer:-ms-fullscreen #fullscreenButton,
-    #videoContainer:fullscreen #refreshButton,
-    #videoContainer:-webkit-full-screen #refreshButton,
-    #videoContainer:-moz-full-screen #refreshButton,
-    #videoContainer:-ms-fullscreen #refreshButton {
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -77,6 +66,7 @@
     const fullBtn   = document.getElementById('fullscreenButton');
     const refBtn    = document.getElementById('refreshButton');
 
+    // Fullscreen toggle
     fullBtn.addEventListener('click', () => {
       if (container.requestFullscreen) {
         container.requestFullscreen();
@@ -89,16 +79,24 @@
       }
     });
 
+    // Hide/show buttons on fullscreen change
     document.addEventListener('fullscreenchange', () => {
-      if (document.fullscreenElement) {
-        video.removeAttribute('controls');
+      const isFull = document.fullscreenElement === container || document.webkitFullscreenElement === container;
+      if (isFull) {
+        fullBtn.style.display = 'none';
+        refBtn.style.display  = 'none';
+      } else {
+        fullBtn.style.display = 'block';
+        refBtn.style.display  = 'block';
       }
+      // ensure controls still hidden
+      video.removeAttribute('controls');
     });
 
-    // Refresh knop functie met cache-busting
+    // Refresh button functionality with cache busting
     refBtn.addEventListener('click', () => {
-      const currentTime = new Date().getTime();
-      video.src = 'assets/video/Welkomfilmpje.mp4?t=' + currentTime;
+      const timestamp = new Date().getTime();
+      video.src = 'assets/video/Welkomfilmpje.mp4?t=' + timestamp;
       video.load();
       video.play();
     });
