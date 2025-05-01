@@ -18,10 +18,11 @@
 </head>
 <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background-color:black;">
   <!-- Video-element met ID om te kunnen aanpassen -->
-  <video id="videoElement" autoplay loop muted controls style="width:100%; height:auto;">
-    <source src="assets/video/Welkomfilmpje.mp4" type="video/mp4">
-    Je browser ondersteunt deze video niet.
-  </video>
+  <video id="videoElement" autoplay loop muted style="width:100%; height:auto;" oncontextmenu="return false;">
+  <source src="assets/video/Welkomfilmpje.mp4" type="video/mp4">
+  Je browser ondersteunt deze video niet.
+</video>
+
 
   <!-- Verversen knop -->
   <button onclick="refreshVideo()">Vernieuw de video</button>
