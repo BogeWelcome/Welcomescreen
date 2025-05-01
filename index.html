@@ -5,26 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welkom Video</title>
   <script>
-    // Functie om de video te verversen
-    function refreshVideo() {
+    // Functie om de video in volledig scherm te openen
+    function toggleFullScreen() {
       var video = document.getElementById("videoElement");
-      var currentTime = new Date().getTime();  // Huidige tijd als cache-busting parameter
-      var newSrc = "assets/video/Welkomfilmpje.mp4?t=" + currentTime;
-      video.src = newSrc;  // Zet de nieuwe bron voor de video
-      video.load();        // Laadt de nieuwe video
-      video.play();        // Speelt de video opnieuw af
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) { // Firefox
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // Internet Explorer
+        video.msRequestFullscreen();
+      }
     }
   </script>
 </head>
 <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background-color:black;">
-  <!-- Video-element met ID om te kunnen aanpassen -->
+  <!-- Video-element zonder controls -->
   <video id="videoElement" autoplay loop muted style="width:100%; height:auto;" oncontextmenu="return false;">
-  <source src="assets/video/Welkomfilmpje.mp4" type="video/mp4">
-  Je browser ondersteunt deze video niet.
-</video>
+    <source src="assets/video/Welkomfilmpje.mp4" type="video/mp4">
+    Je browser ondersteunt deze video niet.
+  </video>
 
-
-  <!-- Verversen knop -->
-  <button onclick="refreshVideo()">Vernieuw de video</button>
+  <!-- Knop voor Volledig Scherm -->
+  <button onclick="toggleFullScreen()" style="position:absolute; top:10px; left:10px; padding:10px; background-color:rgba(0,0,0,0.5); color:white; border:none; cursor:pointer;">Volledig Scherm</button>
 </body>
 </html>
