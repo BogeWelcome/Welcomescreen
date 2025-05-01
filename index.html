@@ -32,14 +32,24 @@
       font-size: 16px;
       border-radius: 5px;
       z-index: 10;
+      transition: opacity 0.3s ease;
     }
     #fullscreenButton {
       top: 20px;
       left: 20px;
     }
     #refreshButton {
-      top: 70px; /* onder de fullscreen knop */
+      top: 70px;
       left: 20px;
+    }
+    /* Hide buttons when in fullscreen */
+    :fullscreen #fullscreenButton,
+    :-webkit-full-screen #fullscreenButton,
+    :-moz-full-screen #fullscreenButton,
+    :fullscreen #refreshButton,
+    :-webkit-full-screen #refreshButton,
+    :-moz-full-screen #refreshButton {
+      display: none;
     }
   </style>
 </head>
@@ -77,7 +87,7 @@
       }
     });
 
-    // Controleer fullscreenchange om controls te verwijderen
+    // Hide controls again on fullscreen change and ensure playback
     document.addEventListener('fullscreenchange', () => {
       if (document.fullscreenElement) {
         video.removeAttribute('controls');
