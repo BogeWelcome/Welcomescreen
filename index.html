@@ -4,13 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welkom Video</title>
+  <script>
+    // Functie om de video te verversen
+    function refreshVideo() {
+      var video = document.getElementById("videoElement");
+      var currentTime = new Date().getTime();  // Huidige tijd als cache-busting parameter
+      var newSrc = "assets/video/Welkomfilmpje.mp4?t=" + currentTime;
+      video.src = newSrc;  // Zet de nieuwe bron voor de video
+      video.load();        // Laadt de nieuwe video
+      video.play();        // Speelt de video opnieuw af
+    }
+  </script>
 </head>
 <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background-color:black;">
-  <video autoplay loop muted controls style="width:100%; height:auto;">
+  <!-- Video-element met ID om te kunnen aanpassen -->
+  <video id="videoElement" autoplay loop muted controls style="width:100%; height:auto;">
     <source src="assets/video/Welkomfilmpje.mp4" type="video/mp4">
     Je browser ondersteunt deze video niet.
   </video>
+
   <!-- Verversen knop -->
-  <button onclick="window.location.reload();">Vernieuw de video</button>
+  <button onclick="refreshVideo()">Vernieuw de video</button>
 </body>
 </html>
